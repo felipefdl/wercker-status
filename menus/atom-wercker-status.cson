@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable atom-wercker-status': 'atom-wercker-status:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'atom-wercker-status'
+      'submenu': [
+        { 'label': 'Toggle', 'command': 'atom-wercker-status:toggle' }
+      ]
+    ]
+  }
+]

@@ -2,15 +2,16 @@
   "name": "atom-wercker-status",
   "main": "./lib/init",
   "version": "0.0.1",
-  "description": "Wercker Status in your status bar",
-  "author": "Felipe F. Lima <felipe@ferreiradelima.com>",
+  "description": "Add Wercker status of the project to the Atom status bar.",
   "repository": "https://github.com/felipefdl/atom-wercker-status",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
   "dependencies": {
-    "querystring": "^0.2.0",
+    "async": "^0.9.0",
+    "iniparser": "^1.0.5",
+    "lodash": "^2.4.1",
     "request": "^2.36.0"
   }
 }

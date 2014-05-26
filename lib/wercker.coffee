@@ -30,12 +30,12 @@ class Wercker
             password: pass
             oauthscope: 'cli'
 
-        this.do_post constant.PATH_BASIC_ACCESS_TOKEN, postobj, cb
+        @do_post constant.PATH_BASIC_ACCESS_TOKEN, postobj, cb
 
     get_applications: (cb) ->
         getobj =
             token: atom.config.get 'atom-wercker-status.Token'
 
-        this.do_get constant.PATH_GET_APPLICATIONS, getobj, cb
+        @do_get constant.PATH_GET_APPLICATIONS, getobj, cb
 
 module.exports = new Wercker

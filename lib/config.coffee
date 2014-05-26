@@ -1,35 +1,50 @@
-wercker = require('./wercker')
+wercker        = require './wercker'
+wercker_status = require './wercker_status'
 
 class WerckerConfig
-    context = null
+    ctx = null
 
-    constructor: () ->
-        context = this
-
-        if !this.get_config().user
-            this.set_config('', '', '')
+    init: (cb) ->
+        ctx = this
+        if !@get_config().user
+            @reset_config()
+            cb(false)
         else if !this.get_config().token
-            this.get_set_token()
+            @get_set_token(cb)
+        else
+            cb(true)
 
     get_config: () ->
-        user =
-            user: atom.config.get 'atom-wercker-status.Username'
-            pass: atom.config.get 'atom-wercker-status.Password'
-            token: atom.config.get 'atom-wercker-status.Token'
-        return user
+        interval = Number(atom.config.get('atom-wercker-status.Interval_Minutes')) || 2
+        return user =
+            user     : atom.config.get 'atom-wercker-status.Username'
+            pass     : atom.config.get 'atom-wercker-status.Password'
+            token    : atom.config.get 'atom-wercker-status.Token'
+            interval : ((1000 * (60 * interval)) || 10000)
 
-    set_config: (user, pass, token) ->
-        token = atom.config.set 'atom-wercker-status.Token', token if token != null
-        user = atom.config.set 'atom-wercker-status.Username', user if user != null
-        pass = atom.config.set 'atom-wercker-status.Password', pass if pass != null
+    reset_config: () ->
+        atom.config.set 'atom-wercker-status.Token', null
+        atom.config.set 'atom-wercker-status.Username', ''
+        atom.config.set 'atom-wercker-status.Password', ''
+        atom.config.set 'atom-wercker-status.Interval_Minutes', 2
 
     set_token: (token) ->
         atom.config.set 'atom-wercker-status.Token', token
 
-    get_set_token: () ->
-        user = this.get_config()
+    get_set_token: (cb) ->
+        user = @get_config()
         wercker.request_oauth_token user.user, user.pass, (err, result) ->
-            console.log err, result
-            context.set_config(null, null, result.data.accessToken)
+            return console.log(err) if err
+            if result.data?.accessToken
+                ctx.set_token(result.data.accessToken)
+                cb(true)
+            else if result.errorMessage == 'User not found'
+                throw "Wercker Status: User or password incorrect"
+                cb(false)
+            else if result.errorMessage
+                throw "Wercker Status: #{result.errorMessage}"
+                cb(false)
+            else
+                cb(false)
 
 module.exports = new WerckerConfig

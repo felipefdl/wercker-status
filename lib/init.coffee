@@ -1,11 +1,14 @@
-config = require './config'
-wercker = require('./wercker')
+config         = require './config'
+wercker_status = require './wercker_status'
 
 class WerckerStatusInit
     activate: () ->
-        console.log('Wercker Status Started')
-        wercker.get_applications (err, result) ->
-            console.log err, result
-            atom.workspaceView.statusBar?.prependRight('<span>Wercker: STATUS HERE<span>')
+        atom.workspaceView.command "atom-wercker-status:checknow", => @exec()
+        setTimeout @exec, 400
+        setInterval @exec, config.get_config().interval
+
+    exec: () ->
+        config.init (start) ->
+            wercker_status.init() if start
 
 module.exports = new WerckerStatusInit

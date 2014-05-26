@@ -5,9 +5,6 @@ build:
             name: install dependencies
             code: npm install --silent
         - script:
-            name: test
-            code: make test
-        - script:
             name: environment info
             code: |-
                 echo "node version: $(node -v)"

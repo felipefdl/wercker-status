@@ -1,4 +1,4 @@
-## 0.0.1 - First Release
+## 0.1.0 - First Release
 * Start Project
 * Communication with the Wercker server
 * Get token

@@ -10,8 +10,10 @@ class WerckerStatus
         ctx = this
         @set_status('...')
         exec = (err, result) ->
-            return console.log(err) if err
-            ctx.set_status(result)
+            if err
+                ctx.set_status(null)
+            else
+                ctx.set_status(result)
         async.waterfall [@get_gitparams, @get_wercker_status], exec
 
     get_gitparams: (cb) ->
@@ -26,31 +28,31 @@ class WerckerStatus
             if apps.error?.message == 'Unknown token'
                 return atom.config.set('wercker-status.Token', null)
             app = _.first(_.where(apps, {'url': gitparams.url}))
-            return ctx.set_status(null) if !app # When don't match with wercker apps
+            return cb('App not found') if !app # When don't match with wercker apps
 
             wercker.get_builds app.id, (err, builds) ->
                 return cb(err || 'Builds not found') if err or !builds
                 build = _.first(_.where(builds, {"branch": gitparams.branch}))
+                return cb('Build not found') if !build
                 cb(null, build)
 
     set_status: (build) ->
+        $wercker_status = atom.workspaceView.find('#wercker-status')
+        return $wercker_status.remove() if !build
+
         if (typeof build == 'string')
             string_instatus = "<span>#{build}</span>"
         else
             string_instatus = "<a href=\"#{wercker.mount_url(build.id)}\" class=\"#{build.result?.toLowerCase()}\">#{build.result?.toUpperCase()}</a>"
         string_wercker = "<span>Wercker:</span>"
         string_inner   = "#{string_wercker} #{string_instatus}"
-        objwersta      = atom.workspaceView.find('#wercker-status')
 
-        if objwersta.length == 0
+        if $wercker_status.length == 0
             atom.workspaceView.statusBar?.prependRight("<div id=\"wercker-status\"></div>")
-            objwersta = atom.workspaceView.find('#wercker-status')
+            $wercker_status = atom.workspaceView.find('#wercker-status')
         else
-            objwersta.find('a, span').remove()
+            $wercker_status.find('a, span').remove()
 
-        if !build
-            objwersta.remove()
-        else
-            objwersta.append(string_inner)
+        $wercker_status.append(string_inner)
 
 module.exports = new WerckerStatus

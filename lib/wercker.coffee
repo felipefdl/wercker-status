@@ -38,4 +38,14 @@ class Wercker
 
         @do_get constant.PATH_GET_APPLICATIONS, getobj, cb
 
+    get_builds: (project_id, cb) ->
+        getobj =
+            token: atom.config.get 'wercker-status.Token'
+        url = constant.PATH_GET_BUILDS.replace('{projectId}', project_id)
+
+        @do_get url, getobj, cb
+
+    mount_url: (build_id) ->
+        return "#{constant.DEFAULT_WERCKER_URL}/#build/#{build_id}"
+
 module.exports = new Wercker

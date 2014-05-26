@@ -6,6 +6,7 @@ Add Wercker status of the project to the Atom status bar.
 
 ## Code Status
 [![wercker status](https://app.wercker.com/status/f0845e5ad84b372173d3839a3e8596e1/s "wercker status")](https://app.wercker.com/project/bykey/f0845e5ad84b372173d3839a3e8596e1)
+[![Build Status](https://travis-ci.org/felipefdl/wercker-status.svg?branch=master)](https://travis-ci.org/felipefdl/wercker-status)
 [![Dependency Status](https://gemnasium.com/felipefdl/wercker-status.svg)](https://gemnasium.com/felipefdl/wercker-status)
 [![Gittip](http://img.shields.io/gittip/felipefdl.svg)](https://www.gittip.com/felipefdl)
 

@@ -36,16 +36,20 @@ class WerckerStatus
                 return cb('Build not found') if !build
                 cb(null, build)
 
-    set_status: (build) ->
-        $wercker_status = atom.workspaceView.find('#wercker-status')
-        return $wercker_status.remove() if !build
-
-        if (typeof build == 'string')
-            string_instatus = "<span>#{build}</span>"
+    handle_string: (buildobj) ->
+        if buildobj.result == 'unknown'
+            status = buildobj.status
         else
-            string_instatus = "<a href=\"#{wercker.mount_url(build.id)}\" class=\"#{build.result?.toLowerCase()}\">#{build.result?.toUpperCase()}</a>"
-        string_wercker = "<span>Wercker:</span>"
-        string_inner   = "#{string_wercker} #{string_instatus}"
+            status = buildobj.result
+        href = wercker.mount_url(buildobj.id)
+        return "<a href=\"#{href}\" class=\"#{status.toLowerCase()}\">#{status.toUpperCase()}</a>"
+
+    set_status: (status) ->
+        $wercker_status = atom.workspaceView.find('#wercker-status')
+        return $wercker_status.remove() if !status
+
+        string_status = if typeof status == 'string' then "<span>#{status}</span>" else @handle_string(status)
+        string_append = "<span>Wercker:</span> #{string_status}"
 
         if $wercker_status.length == 0
             atom.workspaceView.statusBar?.prependRight("<div id=\"wercker-status\"></div>")
@@ -53,6 +57,6 @@ class WerckerStatus
         else
             $wercker_status.find('a, span').remove()
 
-        $wercker_status.append(string_inner)
+        $wercker_status.append(string_append)
 
 module.exports = new WerckerStatus

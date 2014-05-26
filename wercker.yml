@@ -1,11 +1,9 @@
-box: wercker/nodejs
+box: felipefdl/atom
 build:
     steps:
         - script:
-            name: install dependencies
-            code: npm install --silent
+            name: Build Atom.io package
+            code: apm test
         - script:
             name: environment info
-            code: |-
-                echo "node version: $(node -v)"
-                echo "npm version: $(npm -v)"
+            code: apm --version

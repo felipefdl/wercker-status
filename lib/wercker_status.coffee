@@ -37,6 +37,7 @@ class WerckerStatus
                 cb(null, build)
 
     handle_string: (buildobj) ->
+        return "<span>ERROR</span>" if !buildobj.result and !buildobj.status
         if buildobj.result == 'unknown'
             status = buildobj.status
         else

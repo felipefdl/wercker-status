@@ -1,9 +1,10 @@
 box: felipefdl/atom
 build:
     steps:
-        - script:
-            name: Build Atom.io package
-            code: apm test
+        # FIXME: apm does not work without graphic manager yet.
+        # - script:
+        #     name: Build Atom.io package
+        #     code: apm test
         - script:
             name: environment info
             code: apm --version

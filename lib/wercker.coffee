@@ -34,7 +34,7 @@ class Wercker
 
     get_applications: (cb) ->
         getobj =
-            token: atom.config.get 'atom-wercker-status.Token'
+            token: atom.config.get 'wercker-status.Token'
 
         @do_get constant.PATH_GET_APPLICATIONS, getobj, cb
 

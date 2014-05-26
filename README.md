@@ -2,9 +2,7 @@
 
 Add Wercker status of the project to the Atom status bar.
 
-![Full editor screenshot](https://raw.github.com/felipefdl/atom-wercker-status/master/screenshots/full_editor.png)
-![Wercker fail screenshot](https://raw.github.com/felipefdl/atom-wercker-status/master/screenshots/wercker_fail.png)
-![Wercker pass screenshot](https://raw.github.com/felipefdl/atom-wercker-status/master/screenshots/wercker_pass.png)
+![Full editor screenshot](https://raw.github.com/felipefdl/wercker-status/master/screenshots/full_editor.png)
 
 ## Code Status
 
@@ -12,7 +10,15 @@ Add Wercker status of the project to the Atom status bar.
 
 ## Installing
 You will find this package in "atom" packages in the settings.
-or run `apm install atom-wercker-status` from the command line.
+or run `apm install wercker-status` from the command line.
+
+## Using
+The status Wercker operates automatically, identifying your project and getting the status of the build. But you can also use the following hotkeys:
+* `shift-ctrl-W` - Hotkey to check status in Windows/Linux
+* `shift-cmd-W` - Hotkey to check status in Mac OS X
+* `wercker-status:checknow` - Use this command to bind other command.
+
+And you can find the "Wercker status" in  menu "Packages".
 
 ## Documentation
 
@@ -22,4 +28,4 @@ In the first time after installation , you need to configuration the library, wi
 
 ## License
 
-Atom Wercker Status is released under the [MIT License](https://github.com/felipefdl/atom-wercker-status/blob/master/LICENSE.md).
+Atom Wercker Status is released under the [MIT License](https://github.com/felipefdl/wercker-status/blob/master/LICENSE.md).

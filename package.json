@@ -1,9 +1,9 @@
 {
-  "name": "atom-wercker-status",
+  "name": "wercker-status",
   "main": "./lib/init",
   "version": "0.0.1",
   "description": "Add Wercker status of the project to the Atom status bar.",
-  "repository": "https://github.com/felipefdl/atom-wercker-status",
+  "repository": "https://github.com/felipefdl/wercker-status",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

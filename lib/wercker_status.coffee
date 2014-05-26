@@ -24,7 +24,7 @@ class WerckerStatus
         wercker.get_applications (err, result) ->
             return cb(err || 'Applications not found') if err or !result
             if result.error?.message == 'Unknown token'
-                return atom.config.set('atom-wercker-status.Token', null)
+                return atom.config.set('wercker-status.Token', null)
             obj_index = _.findIndex result, {'url': url}
             if obj_index == -1
                 return ctx.set_status(null) # When don't match with wercker apps
@@ -34,11 +34,11 @@ class WerckerStatus
         string_wercker = "<span>Wercker:</span>"
         string_instatus = "<span class=\"#{status?.toLowerCase()}\">#{status?.toUpperCase()}</span>"
         string_inner    = "#{string_wercker} #{string_instatus}"
-        objwersta = atom.workspaceView.find('#atom-wercker-status')
+        objwersta = atom.workspaceView.find('#wercker-status')
 
         if objwersta.length == 0
-            atom.workspaceView.statusBar?.prependRight("<div id=\"atom-wercker-status\"></div>")
-            objwersta = atom.workspaceView.find('#atom-wercker-status')
+            atom.workspaceView.statusBar?.prependRight("<div id=\"wercker-status\"></div>")
+            objwersta = atom.workspaceView.find('#wercker-status')
         else
             objwersta.find('span').remove()
 

@@ -2,10 +2,10 @@ config = require '../lib/config'
 
 describe 'Configuration lib', ->
     it 'get_config', ->
-        atom.config.set 'atom-wercker-status.Token', '123'
-        atom.config.set 'atom-wercker-status.Username', 'bozo'
-        atom.config.set 'atom-wercker-status.Password', 'onetwothree'
-        atom.config.set 'atom-wercker-status.Interval_Minutes', 1
+        atom.config.set 'wercker-status.Token', '123'
+        atom.config.set 'wercker-status.Username', 'bozo'
+        atom.config.set 'wercker-status.Password', 'onetwothree'
+        atom.config.set 'wercker-status.Interval_Minutes', 1
         configloaded = config.get_config()
         expect(configloaded.user).toBe('bozo')
         expect(configloaded.pass).toBe('onetwothree')
@@ -18,10 +18,10 @@ describe 'Configuration lib', ->
         expect(configloaded.token).toBe('1337')
 
     it 'reset_config', ->
-        atom.config.set 'atom-wercker-status.Token', '123'
-        atom.config.set 'atom-wercker-status.Username', 'bozo'
-        atom.config.set 'atom-wercker-status.Password', 'onetwothree'
-        atom.config.set 'atom-wercker-status.Interval_Minutes', 1
+        atom.config.set 'wercker-status.Token', '123'
+        atom.config.set 'wercker-status.Username', 'bozo'
+        atom.config.set 'wercker-status.Password', 'onetwothree'
+        atom.config.set 'wercker-status.Interval_Minutes', 1
         config.reset_config()
         configloaded = config.get_config()
         expect(configloaded.user).toBe('')

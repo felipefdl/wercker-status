@@ -15,21 +15,21 @@ class WerckerConfig
             cb(true)
 
     get_config: () ->
-        interval = Number(atom.config.get('atom-wercker-status.Interval_Minutes')) || 2
+        interval = Number(atom.config.get('wercker-status.Interval_Minutes')) || 2
         return user =
-            user     : atom.config.get 'atom-wercker-status.Username'
-            pass     : atom.config.get 'atom-wercker-status.Password'
-            token    : atom.config.get 'atom-wercker-status.Token'
+            user     : atom.config.get 'wercker-status.Username'
+            pass     : atom.config.get 'wercker-status.Password'
+            token    : atom.config.get 'wercker-status.Token'
             interval : ((1000 * (60 * interval)) || 10000)
 
     reset_config: () ->
-        atom.config.set 'atom-wercker-status.Token', null
-        atom.config.set 'atom-wercker-status.Username', ''
-        atom.config.set 'atom-wercker-status.Password', ''
-        atom.config.set 'atom-wercker-status.Interval_Minutes', 2
+        atom.config.set 'wercker-status.Token', null
+        atom.config.set 'wercker-status.Username', ''
+        atom.config.set 'wercker-status.Password', ''
+        atom.config.set 'wercker-status.Interval_Minutes', 2
 
     set_token: (token) ->
-        atom.config.set 'atom-wercker-status.Token', token
+        atom.config.set 'wercker-status.Token', token
 
     get_set_token: (cb) ->
         user = @get_config()

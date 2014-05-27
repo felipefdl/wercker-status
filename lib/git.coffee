@@ -9,18 +9,16 @@ class WerckerGit
                 url = data['remote "origin"']?.url
                 return cb('Git params invalid') if !url
 
-                url = url.replace /\.git/, ""
-                if (url.indexOf "git@github.com:") == 0
-                    username = ((url.split ":")[1].split "/")[0]
-                    repository = ((url.split ":")[1].split "/")[1]
-                else
-                    username = (url.split "/")[3]
-                    repository = (url.split "/")[4]
+                if url.indexOf("git@") == 0
+                    username = url.split(':')[1].split('/')[0]
+                    repository = url.split(':')[1].split('/')[1]
+                else if url.indexOf('https://') == 0
+                    username   = url.split('/')[3]
+                    repository = url.split('/')[4]
 
                 returnobj =
-                    ssh : "git@github.com:"+username+"/"+repository+".git"
-                    https : "https://github.com/"+username+"/"+repository+".git"
-                    branch : branch
+                    repository : "#{username}/#{repository}"
+                    branch     : branch
                 cb(null, returnobj)
         else
             cb('This package does not have repository')

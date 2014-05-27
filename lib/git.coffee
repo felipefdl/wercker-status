@@ -6,10 +6,21 @@ class WerckerGit
         git_project = atom.project.getRepo()
         if git_project
             iniparser.parse "#{git_project.path}/config", (err, data) ->
+                url = data['remote "origin"']?.url
+                return cb('Git params invalid') if !url
+
+                url = url.replace /\.git/, ""
+                if (url.indexOf "git@github.com:") == 0
+                    username = ((url.split ":")[1].split "/")[0]
+                    repository = ((url.split ":")[1].split "/")[1]
+                else
+                    username = (url.split "/")[3]
+                    repository = (url.split "/")[4]
+
                 returnobj =
-                    url    : data['remote "origin"']?.url
+                    ssh : "git@github.com:"+username+"/"+repository+".git"
+                    https : "https://github.com/"+username+"/"+repository+".git"
                     branch : branch
-                return cb('Git params invalid') if !returnobj.url or !returnobj.branch
                 cb(null, returnobj)
         else
             cb('This package does not have repository')

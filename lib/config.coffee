@@ -1,8 +1,9 @@
-wercker        = require './wercker'
+Wercker        = require 'wercker'
 wercker_status = require './wercker_status'
 
 class WerckerConfig
     ctx = null
+    wercker = new Wercker()
 
     init: (cb) ->
         ctx = this
@@ -38,12 +39,8 @@ class WerckerConfig
             if result.data?.accessToken
                 ctx.set_token(result.data.accessToken)
                 cb(true)
-            else if result.errorMessage == 'User not found'
-                throw "Wercker Status: User or password incorrect"
-                cb(false)
             else if result.errorMessage
-                throw "Wercker Status: #{result.errorMessage}"
-                cb(false)
+                wercker_status.set_status(result.errorMessage)
             else
                 cb(false)
 

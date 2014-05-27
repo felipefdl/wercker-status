@@ -12,6 +12,7 @@
     "async": "^0.9.0",
     "iniparser": "^1.0.5",
     "lodash": "^2.4.1",
-    "request": "^2.36.0"
+    "request": "^2.36.0",
+    "wercker": "0.0.1"
   }
 }

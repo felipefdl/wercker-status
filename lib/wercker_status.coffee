@@ -1,13 +1,16 @@
 async   = require 'async'
 _       = require 'lodash'
 git     = require './git'
-wercker = require './wercker'
+Wercker = require 'wercker'
 
 class WerckerStatus
     ctx = null
+    wercker = null
 
     init: () ->
         ctx = this
+        configwer = {"token": atom.config.get('wercker-status.Token')}
+        wercker = new Wercker(configwer)
         @set_status('...')
         exec = (err, result) ->
             if err
@@ -33,7 +36,7 @@ class WerckerStatus
             wercker.get_builds app.id, (err, builds) ->
                 return cb(err || 'Builds not found') if err or !builds
                 build = _.first(_.where(builds, {"branch": gitparams.branch}))
-                return cb('Build not found') if !build
+                return cb('Build not found') if !build # When don't match with wercker build
                 cb(null, build)
 
     handle_string: (buildobj) ->
@@ -42,7 +45,7 @@ class WerckerStatus
             status = buildobj.status
         else
             status = buildobj.result
-        href = wercker.mount_url(buildobj.id)
+        href = @mount_url(buildobj.id)
         return "<a href=\"#{href}\" class=\"#{status.toLowerCase()}\">#{status.toUpperCase()}</a>"
 
     set_status: (status) ->
@@ -59,5 +62,8 @@ class WerckerStatus
             $wercker_status.find('a, span').remove()
 
         $wercker_status.append(string_append)
+
+    mount_url: (build_id) ->
+        return "#{wercker?.constant.DEFAULT_WERCKER_URL}/#build/#{build_id}"
 
 module.exports = new WerckerStatus

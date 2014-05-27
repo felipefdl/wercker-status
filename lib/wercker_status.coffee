@@ -32,8 +32,7 @@ class WerckerStatus
             if apps.error?.message == 'Unknown token'
                 return atom.config.set('wercker-status.Token', null)
             app = _.first(_.where(apps, {'url': gitparams.ssh}))
-            if !app
-                app = _.first(_.where(apps, {'url': gitparams.https}))
+            app = _.first(_.where(apps, {'url': gitparams.https})) if !app
             return cb('App not found') if !app # When don't match with wercker apps
 
             wercker.get_builds app.id, (err, builds) ->

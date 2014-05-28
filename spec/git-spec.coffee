@@ -11,7 +11,7 @@ describe 'Git lib', ->
     only_wercker() 'get_local_git_config', ->
         it 'Success', ->
             git.get_local_git_config (err, data) ->
-                expect(data.repository).toBe('felipe/wercker-status/.git')
+                expect(data.repository).toBe('felipe/wercker-status.git')
                 expect(data.branch).toBe('master')
 
     describe 'get_local_project_git', ->

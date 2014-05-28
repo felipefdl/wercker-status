@@ -11,6 +11,9 @@ build:
                 # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
                 sleep 3
         - script:
+            name: install dependencies
+            code: npm install
+        - script:
             name: build
             code: apm test
         - script:

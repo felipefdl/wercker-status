@@ -9,9 +9,10 @@ inject_atom_project = () ->
 
 describe 'Git lib', ->
     only_wercker() 'get_local_git_config', ->
-        it 'with error', ->
+        it 'Success', ->
             git.get_local_git_config (err, data) ->
-                console.log(data)
+                expect(data.repository).toBe('felipe/wercker-status/.git')
+                expect(data.branch).toBe('master')
 
     describe 'get_local_project_git', ->
         it 'Success with values', ->

@@ -2,7 +2,7 @@ iniparser = require 'iniparser'
 
 class WerckerGit
     get_local_git_config: (cb) ->
-        ctx = this
+        ctx       = this
         localinfo = @get_local_project_git()
         return cb('This package does not have repository') if !localinfo.path
 
@@ -22,7 +22,7 @@ class WerckerGit
 
     get_repo_string: (url) ->
         if url.indexOf("git@") == 0
-            username = url.split(':')[1].split('/')[0]
+            username   = url.split(':')[1].split('/')[0]
             repository = url.split(':')[1].split('/')[1]
         else if url.indexOf('https://') == 0
             username   = url.split('/')[3]

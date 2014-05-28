@@ -2,7 +2,7 @@ git = require '../lib/git'
 
 inject_atom_project = () ->
     atom.project =
-        getRepo: -> {branch: "refs/heads/master", path: "/Users/felipe/Projects/felipe/wercker-status/.git"}
+        getRepo: -> { branch: "refs/heads/master", path: "/Users/felipe/Projects/felipe/wercker-status/.git" }
         destroy: -> return
 
 describe 'Git lib', ->
@@ -21,7 +21,7 @@ describe 'Git lib', ->
 
         it 'Success without values', ->
             atom.project = null
-            localinfo = git.get_local_project_git()
+            localinfo    = git.get_local_project_git()
             expect(typeof localinfo).toBe('object')
             expect(localinfo.branch).toBeUndefined()
             expect(localinfo.path).toBeUndefined()

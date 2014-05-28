@@ -11,5 +11,8 @@ build:
                 # Give xvfb time to start. 3 seconds is the default for all xvfb-run commands.
                 sleep 3
         - script:
+            name: build
+            code: apm test
+        - script:
             name: environment info
             code: apm --version

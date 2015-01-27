@@ -50,19 +50,20 @@ class WerckerStatus
         return "<a href=\"#{href}\" class=\"#{status.toLowerCase()}\">#{status.toUpperCase()}</a>"
 
     set_status: (status) ->
-        $wercker_status = atom.workspaceView.find('#wercker-status')
-        return $wercker_status.remove() if !status
+        workspace_atom = atom.views.getView(atom.workspace)
+        $wercker_status = workspace_atom.querySelector('#wercker-status')
+        return $wercker_status?.remove() if !status
 
         string_status = if typeof status == 'string' then "<span>#{status}</span>" else @handle_string(status)
         string_append = "<span>Wercker:</span> #{string_status}"
 
-        if $wercker_status.length == 0
-            atom.workspaceView.statusBar?.prependRight("<div id=\"wercker-status\"></div>")
-            $wercker_status = atom.workspaceView.find('#wercker-status')
+        if !$wercker_status
+            workspace_atom.querySelector('status-bar')?.prependRight("<div id=\"wercker-status\"></div>")
+            $wercker_status = workspace_atom.querySelector('#wercker-status')
         else
-            $wercker_status.find('a, span').remove()
+            $wercker_status.querySelector('a, span')?.remove()
 
-        $wercker_status.append(string_append)
+        $wercker_status.innerHTML = string_append
 
     mount_url: (build_id) ->
         return "#{wercker?.constant.DEFAULT_WERCKER_URL}/#build/#{build_id}"

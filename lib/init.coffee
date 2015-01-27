@@ -3,7 +3,7 @@ wercker_status = require './wercker_status'
 
 class WerckerStatusInit
     activate: () ->
-        atom.workspaceView.command "wercker-status:checknow", => @exec()
+        atom.commands.add 'atom-workspace', "wercker-status:checknow", => @exec()
         setTimeout @exec, 400
         setInterval @exec, config.get_config().interval
 

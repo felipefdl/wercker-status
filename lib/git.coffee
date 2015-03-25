@@ -24,7 +24,7 @@ class WerckerGit
         if url.indexOf("git@") == 0
             username   = url.split(':')[1].split('/')[0]
             repository = url.split(':')[1].split('/')[1]
-        else if url.indexOf('https://') == 0
+        else if url.indexOf('https://') == 0 or url.indexOf('ssh://') == 0
             username   = url.split('/')[3]
             repository = url.split('/')[4]
         return { username, repository }

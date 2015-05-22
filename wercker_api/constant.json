@@ -1,0 +1,13 @@
+{
+    "DEFAULT_WERCKER_URL"            : "https://app.wercker.com",
+    "API_VERSION"                    : "1.0",
+    "PATH_BASIC_ACCESS_TOKEN"        : "oauth/basicauthaccesstoken",
+    "PATH_BUILD_PROJECT"             : "projects/triggerbuild",
+    "PATH_CREATE_DEPLOYTARGET"       : "deploytargets/create",
+    "PATH_DEPLOY_TARGETS_BY_PROJECT" : "deploytargets/byproject",
+    "PATH_GET_APPLICATIONS"          : "applications",
+    "PATH_DEPLOY"                    : "deploy",
+    "PATH_CHECK_PERMISSIONS"         : "application/{projectId}/validateAccess",
+    "PATH_GET_BUILDS"                : "project/{projectId}/builds",
+    "PATH_GET_DEPLOYS"               : "deploytarget/{deployTargetId}/deploys"
+}

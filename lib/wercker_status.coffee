@@ -1,7 +1,7 @@
 async   = require 'async'
 _       = require 'lodash'
 git     = require './git'
-Wercker = require 'wercker'
+Wercker = require '../wercker_api/'
 
 class WerckerStatus
     ctx = null

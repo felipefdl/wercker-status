@@ -15,7 +15,7 @@ class WerckerStatus
 
         exec = (err, result) ->
             if err
-                ctx.set_status(null)
+                ctx.set_status(err)
             else
                 ctx.set_status(result)
         async.waterfall [@get_gitparams, @get_wercker_status], exec

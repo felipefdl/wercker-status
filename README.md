@@ -17,7 +17,7 @@ or run `apm install wercker-status` from the command line.
 ## Using
 The Wercker build status for your repository will be indicated by the message in the status bar.
 
-In the first time after installation , you need to configuration the library, with your user and password, you will find the fields in "atom" settings.
+In the first time after installation , you need to configuration the library, with your user and password, you will find the fields in "atom" settings. The user and password erase when get token.
 
 The status Wercker operates automatically, identifying your project and getting the status of the build. But you can also use the following hotkeys:
 * `shift-ctrl-W` - Hotkey to check status in Windows/Linux

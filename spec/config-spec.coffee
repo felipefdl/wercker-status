@@ -12,11 +12,6 @@ describe 'Configuration lib', ->
         expect(configloaded.interval).toBe(60000)
         expect(configloaded.token).toBe('123')
 
-    it 'set_token', ->
-        config.set_token('1337')
-        configloaded = config.get_config()
-        expect(configloaded.token).toBe('1337')
-
     it 'reset_config', ->
         atom.config.set 'wercker-status.Token', '123'
         atom.config.set 'wercker-status.Username', 'bozo'

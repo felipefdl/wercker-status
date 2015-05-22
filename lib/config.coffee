@@ -7,13 +7,13 @@ class WerckerConfig
 
     init: (cb) ->
         ctx = this
-        if !@get_config().user
-            @reset_config()
-            cb(false)
-        else if !this.get_config().token
+        if @get_config().token
+            cb(true)
+        else if @get_config().user and @get_config().pass
             @get_set_token(cb)
         else
-            cb(true)
+            @reset_config()
+            cb(false)
 
     get_config: () ->
         interval = Number(atom.config.get('wercker-status.Interval_Minutes')) || 2
@@ -29,15 +29,14 @@ class WerckerConfig
         atom.config.set 'wercker-status.Password', ''
         atom.config.set 'wercker-status.Interval_Minutes', 2
 
-    set_token: (token) ->
-        atom.config.set 'wercker-status.Token', token
-
     get_set_token: (cb) ->
         user = @get_config()
         wercker.request_oauth_token user.user, user.pass, (err, result) ->
             return console.log(err) if err
             if result.data?.accessToken
-                ctx.set_token(result.data.accessToken)
+                atom.config.set 'wercker-status.Token', result.data.accessToken
+                atom.config.set 'wercker-status.Username', undefined
+                atom.config.set 'wercker-status.Password', undefined
                 cb(true)
             else if result.errorMessage
                 wercker_status.set_status(result.errorMessage)

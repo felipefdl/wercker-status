@@ -1,7 +1,7 @@
 {
   "name": "wercker-status",
   "main": "./lib/init",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Add Wercker status of the project to the Atom status bar.",
   "repository": "https://github.com/felipefdl/wercker-status",
   "license": "MIT",

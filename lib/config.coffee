@@ -1,4 +1,4 @@
-Wercker        = require 'wercker'
+Wercker        = require '../wercker_api/'
 wercker_status = require './wercker_status'
 
 class WerckerConfig

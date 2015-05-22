@@ -12,7 +12,8 @@
     "async": "^1.0.0",
     "iniparser": "^1.0.5",
     "lodash": "^3.9.1",
-    "request": "^2.55.0"
+    "request": "^2.55.0",
+    "wercker": "*"
   },
   "devDependencies": {
     "coffee-script": "^1.9.2",

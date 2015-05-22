@@ -15,7 +15,7 @@ class WerckerGit
                 branch     : localinfo.branch
 
     get_local_project_git: () ->
-        atom_project = atom.project?.getRepo()
+        atom_project = atom.project?.getRepositories()[0]
         branch       = atom_project?.branch?.split('/')?[2]
         path         = atom_project?.path
         return { branch, path }

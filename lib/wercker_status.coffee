@@ -58,7 +58,10 @@ class WerckerStatus
         string_append = "<span>Wercker:</span> #{string_status}"
 
         if !$wercker_status
-            workspace_atom.querySelector('status-bar')?.prependRight("<div id=\"wercker-status\"></div>")
+            _statusbar = workspace_atom.querySelector('.status-bar-right')
+            _newdiv    = document.createElement("div")
+            _newdiv.id = "wercker-status"
+            _statusbar.insertBefore(_newdiv, _statusbar.firstChild);
             $wercker_status = workspace_atom.querySelector('#wercker-status')
         else
             $wercker_status.querySelector('a, span')?.remove()

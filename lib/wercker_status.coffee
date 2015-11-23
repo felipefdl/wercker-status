@@ -60,6 +60,7 @@ class WerckerStatus
         if !$wercker_status
             _statusbar = workspace_atom.querySelector('.status-bar-right')
             _newdiv    = document.createElement("div")
+            _newdiv.classList.add('inline-block');
             _newdiv.id = "wercker-status"
             _statusbar.insertBefore(_newdiv, _statusbar.firstChild);
             $wercker_status = workspace_atom.querySelector('#wercker-status')
